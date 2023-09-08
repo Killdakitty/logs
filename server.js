@@ -45,6 +45,21 @@ app.get("/logs/new",(req,res)=>{
     res.render("New")
 })
 
+/**
+ * *Edit
+ */
+app.get("/logs/:id/edit", async(req,res)=>{
+const {id}= req.params;
+try{
+const log = await Log.findById(id);
+res.render("Edit", {log})
+}catch(error){
+console.log(error);
+}
+
+
+})
+
 /***
  * *Show
  */
@@ -71,6 +86,44 @@ app.post('/api/logs', async(req,res)=>{
 
 
 
+/***
+ ** Update
+ *recieving dating from the frontend and update
+ */
+ app.put("/api/logs/:id", async (req, res) => {
+    const { id } = req.params;
+    if (req.body.shopIsBroken=='on'){
+        req.body.shipIsBroken= true;
+    }else{
+        req.body.shipIsBroken=false;
+    }
+   
+    try {
+      // const tweetToUpdate = await Tweet.findById(id);
+      //id, data, what to update
+      const updatedLog = await Log.findByIdAndUpdate(id, req.body, {
+        new: true,
+      });
+      // res.send(updatedTweet);
+      console.log(updatedLog);
+      res.redirect(`/logs/${id}`);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+
+//*Delete
+app.delete("/api/logs/:id", async(req,res)=>{
+    const{id}= req.params
+    try{
+        const deletedLog= await Log.findByIdAndDelete(id)
+        res.redirect('/logs')
+
+    }catch(e){
+        console.log(e);
+    }
+})
 
 
 

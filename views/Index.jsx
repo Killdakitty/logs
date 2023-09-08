@@ -14,7 +14,14 @@ function Index({logs}){
         <li key={log._id} className='border p-5'>
         <a href={`/logs/${log._id}`}>{log.title}</a>
           
-       
+        <br/>   
+        <a href={`/logs/${log._id}/edit`}>Edit Log</a>
+
+<form method="POST" action={`/api/logs/${log._id}?_method=DELETE`}>
+    <input type='submit' value="Delete"/>
+</form>
+
+
         </li>
     )
 })}

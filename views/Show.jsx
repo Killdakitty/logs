@@ -6,7 +6,7 @@ function Show({log}){
         <div>
 
 <nav>
-    <a href="/logs/index"> Go back to Index Page </a>
+    <a href="/logsls"> Go back to Index Page </a>
 </nav>
             <div>{log.title}</div>
             <div>{log.entry}</div>
